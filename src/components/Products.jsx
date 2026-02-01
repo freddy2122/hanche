@@ -1,104 +1,121 @@
-import { useState, useEffect } from 'react'
 import { FiShoppingCart, FiHeart, FiStar, FiEye } from 'react-icons/fi'
 import { useCart } from '../context/CartContext'
 import { useWishlist } from '../context/WishlistContext'
 
 function Products() {
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
   const { addToCart } = useCart()
   const { toggleWishlist, isInWishlist } = useWishlist()
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true)
-      setError(null)
-      try {
-        const response = await fetch('http://localhost:8000/api/products')
-        if (!response.ok) {
-          throw new Error('Erreur lors du chargement des produits')
-        }
-        const data = await response.json()
-        
-        // S'assurer que les données sont un tableau
-        if (Array.isArray(data)) {
-          setProducts(data)
-        } else {
-          console.error('Les données ne sont pas un tableau:', data)
-          setProducts([])
-        }
-      } catch (error) {
-        console.error('Error fetching products:', error)
-        setError(error.message)
-        setProducts([])
-      } finally {
-        setLoading(false)
-      }
+  // Données statiques des produits
+  const products = [
+    {
+      id: 1,
+      name: 'Chaîne de Hanche Dorée',
+      description: 'Chaîne de hanche élégante en laiton doré, parfaite pour sublimer votre style.',
+      price: 45000,
+      original_price: 55000,
+      image: 'https://www.ninanina.fr/wp-content/uploads/2021/08/n7174p-collier-taille-femme-laiton-dore-chaine-pour-hanche-doree-bijoux-de-corps-en-ligne-ninanina.jpg',
+      rating: 4.5,
+      reviews_count: 128,
+      featured: true,
+      active: true
+    },
+    {
+      id: 2,
+      name: 'Chaîne de Hanche Or',
+      description: 'Bijou de taille et chaîne de hanche en or, ornement de ventre élégant.',
+      price: 65000,
+      original_price: 75000,
+      image: 'https://artistika.fr/cdn/shop/files/bijou-de-taille-et-chaine-de-hanche-femme-ornement-de-ventre-or-47863087530270.webp?v=1736576996',
+      rating: 4.8,
+      reviews_count: 95,
+      featured: true,
+      active: true
+    },
+    {
+      id: 3,
+      name: 'Chaîne de Hanche Élégante',
+      description: 'Chaîne de hanche moderne et raffinée pour un look sophistiqué.',
+      price: 38000,
+      original_price: null,
+      image: 'https://media.s-bol.com/m6V1p7V2Rj4n/RNV2oY/1200x1200.jpg',
+      rating: 4.3,
+      reviews_count: 67,
+      featured: false,
+      active: true
+    },
+    {
+      id: 4,
+      name: 'Chaîne de Hanche Classique',
+      description: 'Modèle classique intemporel, idéal pour toutes les occasions.',
+      price: 35000,
+      original_price: 42000,
+      image: 'https://www.ninanina.fr/wp-content/uploads/2021/08/n7174p-collier-taille-femme-laiton-dore-chaine-pour-hanche-doree-bijoux-de-corps-en-ligne-ninanina.jpg',
+      rating: 4.2,
+      reviews_count: 54,
+      featured: false,
+      active: true
+    },
+    {
+      id: 5,
+      name: 'Chaîne de Hanche Premium',
+      description: 'Édition premium avec finition haut de gamme et design exclusif.',
+      price: 85000,
+      original_price: null,
+      image: 'https://artistika.fr/cdn/shop/files/bijou-de-taille-et-chaine-de-hanche-femme-ornement-de-ventre-or-47863087530270.webp?v=1736576996',
+      rating: 5.0,
+      reviews_count: 32,
+      featured: true,
+      active: true
+    },
+    {
+      id: 6,
+      name: 'Chaîne de Hanche Moderne',
+      description: 'Design contemporain pour un style unique et tendance.',
+      price: 42000,
+      original_price: 50000,
+      image: 'https://media.s-bol.com/m6V1p7V2Rj4n/RNV2oY/1200x1200.jpg',
+      rating: 4.6,
+      reviews_count: 89,
+      featured: false,
+      active: true
+    },
+    {
+      id: 7,
+      name: 'Chaîne de Hanche Deluxe',
+      description: 'Modèle deluxe avec détails raffinés et matériaux de qualité supérieure.',
+      price: 72000,
+      original_price: 85000,
+      image: 'https://www.ninanina.fr/wp-content/uploads/2021/08/n7174p-collier-taille-femme-laiton-dore-chaine-pour-hanche-doree-bijoux-de-corps-en-ligne-ninanina.jpg',
+      rating: 4.7,
+      reviews_count: 43,
+      featured: true,
+      active: true
+    },
+    {
+      id: 8,
+      name: 'Chaîne de Hanche Sport',
+      description: 'Modèle sportif, confortable et résistant pour un usage quotidien.',
+      price: 32000,
+      original_price: null,
+      image: 'https://artistika.fr/cdn/shop/files/bijou-de-taille-et-chaine-de-hanche-femme-ornement-de-ventre-or-47863087530270.webp?v=1736576996',
+      rating: 4.1,
+      reviews_count: 76,
+      featured: false,
+      active: true
     }
-    fetchProducts()
-  }, [])
+  ]
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('fr-FR').format(price)
   }
 
-  const handleAddToCart = async (productId) => {
-    try {
-      await addToCart(productId, 1)
-    } catch (error) {
-      console.error('Error adding to cart:', error)
-    }
+  const handleAddToCart = (productId) => {
+    addToCart(productId, 1)
   }
 
-  const handleToggleWishlist = async (productId) => {
-    try {
-      await toggleWishlist(productId)
-    } catch (error) {
-      console.error('Error toggling wishlist:', error)
-    }
-  }
-
-  if (loading) {
-    return (
-      <section id="produits" className="py-20 bg-white">
-        <div className="container mx-auto px-4 lg:px-6">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto mb-4"></div>
-            <p className="text-gray-600">Chargement des produits depuis la base de données...</p>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  if (error) {
-    return (
-      <section id="produits" className="py-20 bg-white">
-        <div className="container mx-auto px-4 lg:px-6">
-          <div className="text-center">
-            <p className="text-red-500 mb-4">Erreur: {error}</p>
-            <p className="text-gray-600">Vérifiez que le serveur backend est démarré sur http://localhost:8000</p>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  if (products.length === 0) {
-    return (
-      <section id="produits" className="py-20 bg-white">
-        <div className="container mx-auto px-4 lg:px-6">
-          <div className="text-center">
-            <h2 className="text-4xl md:text-5xl font-black text-black mb-4">
-              Nos Produits
-            </h2>
-            <p className="text-xl text-gray-600 mb-8">Aucun produit disponible pour le moment.</p>
-            <p className="text-gray-500">Exécutez: <code className="bg-gray-100 px-2 py-1 rounded">php artisan db:seed</code></p>
-          </div>
-        </div>
-      </section>
-    )
+  const handleToggleWishlist = (productId) => {
+    toggleWishlist(productId)
   }
 
   return (
