@@ -125,11 +125,11 @@ function Products() {
               >
                 <div className="relative aspect-square bg-gray-100 overflow-hidden">
                   <img 
-                    src={product.image || 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=600&h=600&fit=crop&q=80'} 
+                    src={product.image || 'https://media.s-bol.com/m6V1p7V2Rj4n/RNV2oY/1200x1200.jpg'} 
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     onError={(e) => {
-                      e.target.src = 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=600&h=600&fit=crop&q=80'
+                      e.target.src = 'https://media.s-bol.com/m6V1p7V2Rj4n/RNV2oY/1200x1200.jpg'
                     }}
                   />
                   

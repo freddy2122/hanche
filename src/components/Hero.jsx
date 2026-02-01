@@ -39,11 +39,11 @@ function Hero({ product }) {
             <div className="relative w-full max-w-lg">
               <div className="aspect-square bg-white rounded-3xl shadow-2xl p-8 flex items-center justify-center relative overflow-hidden group">
                 <img 
-                  src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=800&h=800&fit=crop&q=80" 
+                  src="https://media.s-bol.com/m6V1p7V2Rj4n/RNV2oY/1200x1200.jpg" 
                   alt="Chaîne de hanche" 
                   className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => {
-                    e.target.src = 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=800&h=800&fit=crop&q=80'
+                    e.target.src = 'https://media.s-bol.com/m6V1p7V2Rj4n/RNV2oY/1200x1200.jpg'
                   }}
                 />
                 

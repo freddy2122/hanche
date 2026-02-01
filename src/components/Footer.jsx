@@ -4,33 +4,33 @@ function Footer() {
   const productImages = [
     {
       id: 1,
-      image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=300&h=300&fit=crop&q=80',
-      alt: 'Chaîne de hanche classique'
+      image: 'https://www.ninanina.fr/wp-content/uploads/2021/08/n7174p-collier-taille-femme-laiton-dore-chaine-pour-hanche-doree-bijoux-de-corps-en-ligne-ninanina.jpg',
+      alt: 'Chaîne de hanche dorée'
     },
     {
       id: 2,
-      image: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=300&h=300&fit=crop&q=80',
-      alt: 'Chaîne de hanche élégante'
+      image: 'https://artistika.fr/cdn/shop/files/bijou-de-taille-et-chaine-de-hanche-femme-ornement-de-ventre-or-47863087530270.webp?v=1736576996',
+      alt: 'Chaîne de hanche or'
     },
     {
       id: 3,
-      image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=300&h=300&fit=crop&q=80',
-      alt: 'Chaîne de hanche deluxe'
+      image: 'https://media.s-bol.com/m6V1p7V2Rj4n/RNV2oY/1200x1200.jpg',
+      alt: 'Chaîne de hanche élégante'
     },
     {
       id: 4,
-      image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=300&h=300&fit=crop&q=80',
-      alt: 'Chaîne de hanche sport'
+      image: 'https://www.ninanina.fr/wp-content/uploads/2021/08/n7174p-collier-taille-femme-laiton-dore-chaine-pour-hanche-doree-bijoux-de-corps-en-ligne-ninanina.jpg',
+      alt: 'Chaîne de hanche dorée'
     },
     {
       id: 5,
-      image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=300&h=300&fit=crop&q=80',
-      alt: 'Chaîne de hanche style'
+      image: 'https://artistika.fr/cdn/shop/files/bijou-de-taille-et-chaine-de-hanche-femme-ornement-de-ventre-or-47863087530270.webp?v=1736576996',
+      alt: 'Chaîne de hanche or'
     },
     {
       id: 6,
-      image: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=300&h=300&fit=crop&q=80',
-      alt: 'Chaîne de hanche moderne'
+      image: 'https://media.s-bol.com/m6V1p7V2Rj4n/RNV2oY/1200x1200.jpg',
+      alt: 'Chaîne de hanche élégante'
     }
   ]
 
@@ -164,7 +164,23 @@ function Footer() {
         </div>
         
         {/* Product Images Gallery */}
-        
+        <div className="mb-12">
+          <h4 className="font-bold text-white mb-6 text-lg text-center">Galerie Produits</h4>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {productImages.map((item) => (
+              <div key={item.id} className="aspect-square rounded-lg overflow-hidden group cursor-pointer">
+                <img 
+                  src={item.image} 
+                  alt={item.alt}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  onError={(e) => {
+                    e.target.src = 'https://media.s-bol.com/m6V1p7V2Rj4n/RNV2oY/1200x1200.jpg'
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
          
         {/* Copyright */}
         <div className="border-t border-gray-800 pt-8 text-center">
